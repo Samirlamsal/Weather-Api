@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body><h1 style="text-align: center;">Weather Report one o one</h1>
+    <form method="post" action="{% url 'search' %}" style="float:right;margin:20px;padding:20px;">
+      {% csrf_token %}
+      <input name='q' value="{{request.GET.q}}" placeholder="Search...">
+      <button type="submit">Search</button>
+    </form>
+
+<div style = "text-align:center; border:2px solid black;margin:20px;padding:30px;padding-top:10%;">
+    {% for datas in final_data %}
+    <figure class='img'>
+      <img src="http://openweathermap.org/img/w/{{datas.icon}}.png" style="float:left;">
+    </figure>
+    City:  {{ datas.city }}</br>
+    Temperature(Celsius):  {{ datas.temperature }}</br>
+    Weather:  {{ datas.description }}</br></br></br>
+    {% endfor %}
+</div>
+<div style = "text-align:center;padding-top:10%;border:2px solid black;margin:20px;padding:30px;">
+
+    {% if queries %}
+      {% for que in queries %}
+      <figure class='img'>
+        <img src="http://openweathermap.org/img/w/{{que.icon}}.png" style="float:left;">
+      </figure>
+        City:  {{ que.city }}</br>
+        Temperature(Celsius):  {{ que.temperature }}</br>
+        Weather:  {{ que.description }}</br></br></br>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+
+  </body>
+</html>
